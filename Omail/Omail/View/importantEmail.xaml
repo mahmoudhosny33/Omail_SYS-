@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="Omail.View.importantEmail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Omail.View"
+             xmlns:Components= "clr-namespace:Omail.Components"
+             xmlns:icons="clt-namespace:Omail.ResourceDictionary"
+             mc:Ignorable="d" 
+             d:DesignHeight="770" d:DesignWidth="1400"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            Height="770" Width="1400"
+            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+            TextElement.FontWeight="Regular"
+            TextElement.FontSize="13"
+            TextOptions.TextFormattingMode="Ideal"
+            TextOptions.TextRenderingMode="Auto"
+            Background="{DynamicResource MaterialDesignPaper}"
+            FontFamily="{DynamicResource MaterialDesignFont}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <Components:AppPanel VerticalAlignment="Top" Grid.Row="0" Height="40"/>
+        <Components:BlueGradientRect Grid.Row="1" Grid.RowSpan="2"  />
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Button Margin="10 0 0 0" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Center"  Width="100" Height="50" Click="Button_Click"   >
+                <Button.Content>
+                    <materialDesign:PackIcon Kind="ArrowBack" />
+                </Button.Content>
+            </Button>
+            <Label Margin="400 0 0 0 " Content="Important Messages " HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"  Foreground="#DDFFFFFF"   />
+            <Button Margin="310 0 0 0" Style="{StaticResource MaterialDesignRaisedDarkButton}" VerticalAlignment="Center"  Width="100" Height="50" Click="Button_Click_1"    >
+                <Button.Content>
+                    <materialDesign:PackIcon Kind="Refresh" />
+                </Button.Content>
+            </Button>
+        </StackPanel>
+        <Border x:Name="MessageViewer" Height="700" Width="1300"  Grid.Row="2" CornerRadius="30" Background="#FF20ADD6">
+            <ScrollViewer x:Name="ScrollMessage"  >
+                <ListView x:Name="ListMessages">
+
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn  DisplayMemberBinding="{Binding userName}" Width="300"/>
+                            <GridViewColumn  DisplayMemberBinding="{Binding subjct}" Width="300"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding eml}" Width="300"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding sentTime}" Width="200"/>
+                            <GridViewColumn  Width="60" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="DeleteBTN" Height="50" Width="50" 
+                                                
+                                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" 
+                                                BorderBrush="{x:Null}" Foreground="White" Click="DeleteBTN_Click"  >
+
+                                            <materialDesign:PackIcon Kind="Delete" Width="25" Height="25"/>
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="60" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="SpamBTN" Height="50" Width="50"  
+                                                
+                                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" 
+                                                BorderBrush="{x:Null}" Foreground="White" Click="SpamBTN_Click"  >
+
+                                            <materialDesign:PackIcon Kind="Block" Width="25" Height="25"/>
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="60" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="OPenBTN" Height="50" Width="50"  
+                                                
+                                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" 
+                                                BorderBrush="{x:Null}" Foreground="White" Click="OPenBTN_Click"  >
+
+                                            <materialDesign:PackIcon Kind="OpenInNew" Width="25" Height="25"/>
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

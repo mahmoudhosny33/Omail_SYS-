@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OmailModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepId" />
+    </Key>
+    <Property Name="DepId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepName" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="Email">
+    <Key>
+      <PropertyRef Name="EmailId" />
+    </Key>
+    <Property Name="EmailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpId" Type="int" Nullable="false" />
+    <Property Name="E_Subject" Type="varchar" MaxLength="255" />
+    <Property Name="Body" Type="nvarchar" MaxLength="4000" />
+    <Property Name="IsPublicEmail" Type="bit" />
+    <Property Name="IsGroupEmail" Type="bit" />
+    <Property Name="IsPrivateEmail" Type="bit" />
+    <Property Name="Parent" Type="int" />
+    <Property Name="SentTime" Type="datetime" />
+    <Property Name="sentToList" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="EmpGroup">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupName" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmpId" />
+    </Key>
+    <Property Name="EmpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpName" Type="varchar" MaxLength="45" />
+    <Property Name="FirstName" Type="varchar" MaxLength="45" />
+    <Property Name="LastName" Type="varchar" MaxLength="45" />
+    <Property Name="EmpEmail" Type="varchar" MaxLength="255" />
+    <Property Name="BirthDate" Type="date" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="EmpHash" Type="varchar" MaxLength="610" />
+    <Property Name="OrgCode" Type="varchar" MaxLength="610" />
+    <Property Name="Gender" Type="varchar" MaxLength="6" />
+    <Property Name="loginStatus" Type="bit" />
+    <Property Name="IsAdmin" Type="bit" />
+    <Property Name="InGroup" Type="bit" />
+    <Property Name="IsGroupManager" Type="bit" />
+    <Property Name="IsOrgManager" Type="bit" />
+    <Property Name="OrgId" Type="int" />
+    <Property Name="DepId" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Omail.dbo.Employee_has_Email' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Employee_has_Email">
+    <Key>
+      <PropertyRef Name="EmpId" />
+      <PropertyRef Name="EmailId" />
+    </Key>
+    <Property Name="EmpId" Type="int" Nullable="false" />
+    <Property Name="EmailId" Type="int" Nullable="false" />
+    <Property Name="IsStarred" Type="bit" />
+    <Property Name="IsSnoozed" Type="bit" />
+    <Property Name="IsSent" Type="bit" />
+    <Property Name="IsSpam" Type="bit" />
+    <Property Name="IsSeen" Type="bit" />
+    <Property Name="WasDeleted" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Omail.dbo.Employee_In_Group' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Employee_In_Group">
+    <Key>
+      <PropertyRef Name="EmpId" />
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="EmpId" Type="int" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="ProjectName" Type="varchar" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="OrgId" />
+    </Key>
+    <Property Name="OrgId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrgName" Type="varchar" MaxLength="50" />
+    <Property Name="EstablishDate" Type="date" />
+    <Property Name="Vision_Statement" Type="nvarchar" MaxLength="4000" />
+    <Property Name="OrgType" Type="varchar" MaxLength="20" />
+    <Property Name="HasOrgCode" Type="bit" />
+    <Property Name="Manager_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Omail.dbo.Organization_has_Partner' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Organization_has_Partner">
+    <Key>
+      <PropertyRef Name="PartnerId" />
+      <PropertyRef Name="OrgId" />
+    </Key>
+    <Property Name="PartnerId" Type="int" Nullable="false" />
+    <Property Name="OrgId" Type="int" Nullable="false" />
+    <Property Name="SharedVision" Type="nvarchar" MaxLength="4000" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__Email__Parent__44FF419A">
+    <End Role="Email" Type="Self.Email" Multiplicity="0..1" />
+    <End Role="Email1" Type="Self.Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Email">
+        <PropertyRef Name="EmailId" />
+      </Principal>
+      <Dependent Role="Email1">
+        <PropertyRef Name="Parent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee___Email__4D94879B">
+    <End Role="Email" Type="Self.Email" Multiplicity="1" />
+    <End Role="Employee_has_Email" Type="Self.Employee_has_Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Email">
+        <PropertyRef Name="EmailId" />
+      </Principal>
+      <Dependent Role="Employee_has_Email">
+        <PropertyRef Name="EmailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee___EmpId__46E78A0C">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Employee_In_Group" Type="Self.Employee_In_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="Employee_In_Group">
+        <PropertyRef Name="EmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee___EmpId__4CA06362">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Employee_has_Email" Type="Self.Employee_has_Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="Employee_has_Email">
+        <PropertyRef Name="EmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee___Group__47DBAE45">
+    <End Role="EmpGroup" Type="Self.EmpGroup" Multiplicity="1" />
+    <End Role="Employee_In_Group" Type="Self.Employee_In_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpGroup">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="Employee_In_Group">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__DepId__4222D4EF">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__OrgId__412EB0B6">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrgId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="OrgId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Organizat__OrgId__4AB81AF0">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+    <End Role="Organization_has_Partner" Type="Self.Organization_has_Partner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrgId" />
+      </Principal>
+      <Dependent Role="Organization_has_Partner">
+        <PropertyRef Name="OrgId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Organizat__Partn__49C3F6B7">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+    <End Role="Organization_has_Partner" Type="Self.Organization_has_Partner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrgId" />
+      </Principal>
+      <Dependent Role="Organization_has_Partner">
+        <PropertyRef Name="PartnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DepName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="AddEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+    <Parameter Name="E_Subject" Type="varchar" Mode="In" />
+    <Parameter Name="Body" Type="nvarchar" Mode="In" />
+    <Parameter Name="IsPublicEmail" Type="bit" Mode="In" />
+    <Parameter Name="IsGroupMail" Type="bit" Mode="In" />
+    <Parameter Name="IsPrivateEmail" Type="bit" Mode="In" />
+    <Parameter Name="Parent" Type="int" Mode="In" />
+    <Parameter Name="SentToList" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="AddEmpGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GroupName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="AddEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpName" Type="varchar" Mode="In" />
+    <Parameter Name="FirstName" Type="varchar" Mode="In" />
+    <Parameter Name="LastName" Type="varchar" Mode="In" />
+    <Parameter Name="EmpEmail" Type="varchar" Mode="In" />
+    <Parameter Name="BirthDate" Type="date" Mode="In" />
+    <Parameter Name="PhoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Hash" Type="varchar" Mode="In" />
+    <Parameter Name="OrgCode" Type="varchar" Mode="In" />
+    <Parameter Name="Gender" Type="varchar" Mode="In" />
+    <Parameter Name="loginStatus" Type="bit" Mode="In" />
+    <Parameter Name="IsAdmin" Type="bit" Mode="In" />
+    <Parameter Name="InGroup" Type="bit" Mode="In" />
+    <Parameter Name="IsGroupManager" Type="bit" Mode="In" />
+    <Parameter Name="IsOrgManager" Type="bit" Mode="In" />
+    <Parameter Name="OrgId" Type="int" Mode="In" />
+    <Parameter Name="DepId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AddEmpToGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+    <Parameter Name="GroupId" Type="int" Mode="In" />
+    <Parameter Name="ProjectName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="AddOrganization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrgName" Type="varchar" Mode="In" />
+    <Parameter Name="EstablishDate" Type="date" Mode="In" />
+    <Parameter Name="Vision_Statement" Type="nvarchar" Mode="In" />
+    <Parameter Name="OrgType" Type="varchar" Mode="In" />
+    <Parameter Name="HasOrgCode" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="AddOrgPartner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrgId" Type="int" Mode="In" />
+    <Parameter Name="PartnerId" Type="int" Mode="In" />
+    <Parameter Name="SharedVision" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="DeleteDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DepId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmailId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteEmpGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GroupId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteOrganization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrgId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="GetDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DepId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetDepartments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmailId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetEmailsByTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+    <Parameter Name="Date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GetEmailsSentByEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmpGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GroupId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmpGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmployeeEmails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetEmployeeSeenEmails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmployeeSnoozedEmails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmployeeSpamEmails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetEmployeeStarredEmails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetOrganization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrgId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetOrganizations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="MarkEmailAsDeleted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+    <Parameter Name="EmailId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MarkEmailAsSeen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+    <Parameter Name="EmailId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MarkEmailAsSnoozed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+    <Parameter Name="EmailId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MarkEmailAsSpam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+    <Parameter Name="EmailId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MarkEmailAsStarred" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+    <Parameter Name="EmailId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UpdateDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DepId" Type="int" Mode="In" />
+    <Parameter Name="DepName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmailId" Type="int" Mode="In" />
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+    <Parameter Name="E_Subject" Type="varchar" Mode="In" />
+    <Parameter Name="Body" Type="nvarchar" Mode="In" />
+    <Parameter Name="IsPublicEmail" Type="bit" Mode="In" />
+    <Parameter Name="IsGroupMail" Type="bit" Mode="In" />
+    <Parameter Name="IsPrivateEmail" Type="bit" Mode="In" />
+    <Parameter Name="Parent" Type="int" Mode="In" />
+    <Parameter Name="SentToList" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateEmpGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GroupId" Type="int" Mode="In" />
+    <Parameter Name="GroupName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpId" Type="int" Mode="In" />
+    <Parameter Name="EmpName" Type="varchar" Mode="In" />
+    <Parameter Name="FirstName" Type="varchar" Mode="In" />
+    <Parameter Name="LastName" Type="varchar" Mode="In" />
+    <Parameter Name="EmpEmail" Type="varchar" Mode="In" />
+    <Parameter Name="BirthDate" Type="date" Mode="In" />
+    <Parameter Name="PhoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="OrgCode" Type="varchar" Mode="In" />
+    <Parameter Name="Gender" Type="varchar" Mode="In" />
+    <Parameter Name="loginStatus" Type="bit" Mode="In" />
+    <Parameter Name="IsAdmin" Type="bit" Mode="In" />
+    <Parameter Name="InGroup" Type="bit" Mode="In" />
+    <Parameter Name="IsGroupManager" Type="bit" Mode="In" />
+    <Parameter Name="IsOrgManager" Type="bit" Mode="In" />
+    <Parameter Name="OrgId" Type="int" Mode="In" />
+    <Parameter Name="DepId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateOrganization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrgId" Type="int" Mode="In" />
+    <Parameter Name="OrgName" Type="varchar" Mode="In" />
+    <Parameter Name="EstablishDate" Type="date" Mode="In" />
+    <Parameter Name="Vision_Statement" Type="nvarchar" Mode="In" />
+    <Parameter Name="OrgType" Type="varchar" Mode="In" />
+    <Parameter Name="HasOrgCode" Type="bit" Mode="In" />
+  </Function>
+  <EntityContainer Name="OmailModelStoreContainer">
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmpGroup" EntityType="Self.EmpGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_has_Email" EntityType="Self.Employee_has_Email" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Employee_has_Email].[EmpId] AS [EmpId], 
+    [Employee_has_Email].[EmailId] AS [EmailId], 
+    [Employee_has_Email].[IsStarred] AS [IsStarred], 
+    [Employee_has_Email].[IsSnoozed] AS [IsSnoozed], 
+    [Employee_has_Email].[IsSent] AS [IsSent], 
+    [Employee_has_Email].[IsSpam] AS [IsSpam], 
+    [Employee_has_Email].[IsSeen] AS [IsSeen], 
+    [Employee_has_Email].[WasDeleted] AS [WasDeleted]
+    FROM [dbo].[Employee_has_Email] AS [Employee_has_Email]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Employee_In_Group" EntityType="Self.Employee_In_Group" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Employee_In_Group].[EmpId] AS [EmpId], 
+    [Employee_In_Group].[GroupId] AS [GroupId], 
+    [Employee_In_Group].[ProjectName] AS [ProjectName]
+    FROM [dbo].[Employee_In_Group] AS [Employee_In_Group]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Organization_has_Partner" EntityType="Self.Organization_has_Partner" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Organization_has_Partner].[PartnerId] AS [PartnerId], 
+    [Organization_has_Partner].[OrgId] AS [OrgId], 
+    [Organization_has_Partner].[SharedVision] AS [SharedVision]
+    FROM [dbo].[Organization_has_Partner] AS [Organization_has_Partner]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Email__Parent__44FF419A" Association="Self.FK__Email__Parent__44FF419A">
+      <End Role="Email" EntitySet="Email" />
+      <End Role="Email1" EntitySet="Email" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee___Email__4D94879B" Association="Self.FK__Employee___Email__4D94879B">
+      <End Role="Email" EntitySet="Email" />
+      <End Role="Employee_has_Email" EntitySet="Employee_has_Email" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee___EmpId__46E78A0C" Association="Self.FK__Employee___EmpId__46E78A0C">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Employee_In_Group" EntitySet="Employee_In_Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee___EmpId__4CA06362" Association="Self.FK__Employee___EmpId__4CA06362">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Employee_has_Email" EntitySet="Employee_has_Email" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee___Group__47DBAE45" Association="Self.FK__Employee___Group__47DBAE45">
+      <End Role="EmpGroup" EntitySet="EmpGroup" />
+      <End Role="Employee_In_Group" EntitySet="Employee_In_Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__DepId__4222D4EF" Association="Self.FK__Employee__DepId__4222D4EF">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__OrgId__412EB0B6" Association="Self.FK__Employee__OrgId__412EB0B6">
+      <End Role="Organization" EntitySet="Organization" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Organizat__OrgId__4AB81AF0" Association="Self.FK__Organizat__OrgId__4AB81AF0">
+      <End Role="Organization" EntitySet="Organization" />
+      <End Role="Organization_has_Partner" EntitySet="Organization_has_Partner" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Organizat__Partn__49C3F6B7" Association="Self.FK__Organizat__Partn__49C3F6B7">
+      <End Role="Organization" EntitySet="Organization" />
+      <End Role="Organization_has_Partner" EntitySet="Organization_has_Partner" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

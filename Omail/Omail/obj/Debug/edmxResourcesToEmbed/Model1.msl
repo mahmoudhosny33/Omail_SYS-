@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OmailModelStoreContainer" CdmEntityContainer="OmailEntities1">
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="OmailModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="DepId" ColumnName="DepId" />
+          <ScalarProperty Name="DepName" ColumnName="DepName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Emails">
+      <EntityTypeMapping TypeName="OmailModel.Email">
+        <MappingFragment StoreEntitySet="Email">
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="E_Subject" ColumnName="E_Subject" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="IsPublicEmail" ColumnName="IsPublicEmail" />
+          <ScalarProperty Name="IsGroupEmail" ColumnName="IsGroupEmail" />
+          <ScalarProperty Name="IsPrivateEmail" ColumnName="IsPrivateEmail" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="SentTime" ColumnName="SentTime" />
+          <ScalarProperty Name="sentToList" ColumnName="sentToList" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmpGroups">
+      <EntityTypeMapping TypeName="OmailModel.EmpGroup">
+        <MappingFragment StoreEntitySet="EmpGroup">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="OmailModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="EmpEmail" ColumnName="EmpEmail" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="EmpHash" ColumnName="EmpHash" />
+          <ScalarProperty Name="OrgCode" ColumnName="OrgCode" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="loginStatus" ColumnName="loginStatus" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="InGroup" ColumnName="InGroup" />
+          <ScalarProperty Name="IsGroupManager" ColumnName="IsGroupManager" />
+          <ScalarProperty Name="IsOrgManager" ColumnName="IsOrgManager" />
+          <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+          <ScalarProperty Name="DepId" ColumnName="DepId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Organizations">
+      <EntityTypeMapping TypeName="OmailModel.Organization">
+        <MappingFragment StoreEntitySet="Organization">
+          <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+          <ScalarProperty Name="OrgName" ColumnName="OrgName" />
+          <ScalarProperty Name="EstablishDate" ColumnName="EstablishDate" />
+          <ScalarProperty Name="Vision_Statement" ColumnName="Vision_Statement" />
+          <ScalarProperty Name="OrgType" ColumnName="OrgType" />
+          <ScalarProperty Name="HasOrgCode" ColumnName="HasOrgCode" />
+          <ScalarProperty Name="Manager_name" ColumnName="Manager_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="OmailModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee_has_Email">
+      <EntityTypeMapping TypeName="OmailModel.Employee_has_Email">
+        <MappingFragment StoreEntitySet="Employee_has_Email">
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="IsStarred" ColumnName="IsStarred" />
+          <ScalarProperty Name="IsSnoozed" ColumnName="IsSnoozed" />
+          <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+          <ScalarProperty Name="IsSpam" ColumnName="IsSpam" />
+          <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
+          <ScalarProperty Name="WasDeleted" ColumnName="WasDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee_In_Group">
+      <EntityTypeMapping TypeName="OmailModel.Employee_In_Group">
+        <MappingFragment StoreEntitySet="Employee_In_Group">
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Organization_has_Partner">
+      <EntityTypeMapping TypeName="OmailModel.Organization_has_Partner">
+        <MappingFragment StoreEntitySet="Organization_has_Partner">
+          <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
+          <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+          <ScalarProperty Name="SharedVision" ColumnName="SharedVision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddDepartment" FunctionName="OmailModel.Store.AddDepartment" />
+    <FunctionImportMapping FunctionImportName="AddEmail" FunctionName="OmailModel.Store.AddEmail" />
+    <FunctionImportMapping FunctionImportName="AddEmpGroup" FunctionName="OmailModel.Store.AddEmpGroup" />
+    <FunctionImportMapping FunctionImportName="AddEmployee" FunctionName="OmailModel.Store.AddEmployee" />
+    <FunctionImportMapping FunctionImportName="AddEmpToGroup" FunctionName="OmailModel.Store.AddEmpToGroup" />
+    <FunctionImportMapping FunctionImportName="AddOrganization" FunctionName="OmailModel.Store.AddOrganization" />
+    <FunctionImportMapping FunctionImportName="AddOrgPartner" FunctionName="OmailModel.Store.AddOrgPartner" />
+    <FunctionImportMapping FunctionImportName="DeleteDepartment" FunctionName="OmailModel.Store.DeleteDepartment" />
+    <FunctionImportMapping FunctionImportName="DeleteEmail" FunctionName="OmailModel.Store.DeleteEmail" />
+    <FunctionImportMapping FunctionImportName="DeleteEmpGroup" FunctionName="OmailModel.Store.DeleteEmpGroup" />
+    <FunctionImportMapping FunctionImportName="DeleteEmployee" FunctionName="OmailModel.Store.DeleteEmployee" />
+    <FunctionImportMapping FunctionImportName="DeleteOrganization" FunctionName="OmailModel.Store.DeleteOrganization" />
+    <FunctionImportMapping FunctionImportName="GetDepartment" FunctionName="OmailModel.Store.GetDepartment">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetDepartment_Result">
+          <ScalarProperty Name="DepId" ColumnName="DepId" />
+          <ScalarProperty Name="DepName" ColumnName="DepName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetDepartments" FunctionName="OmailModel.Store.GetDepartments">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetDepartments_Result">
+          <ScalarProperty Name="DepId" ColumnName="DepId" />
+          <ScalarProperty Name="DepName" ColumnName="DepName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmail" FunctionName="OmailModel.Store.GetEmail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetEmail_Result">
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="E_Subject" ColumnName="E_Subject" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="SentTime" ColumnName="SentTime" />
+          <ScalarProperty Name="IsPublicEmail" ColumnName="IsPublicEmail" />
+          <ScalarProperty Name="IsGroupEmail" ColumnName="IsGroupEmail" />
+          <ScalarProperty Name="IsPrivateEmail" ColumnName="IsPrivateEmail" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="sentToList" ColumnName="sentToList" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmailsByTime" FunctionName="OmailModel.Store.GetEmailsByTime" />
+    <FunctionImportMapping FunctionImportName="GetEmailsSentByEmployees" FunctionName="OmailModel.Store.GetEmailsSentByEmployees">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetEmailsSentByEmployees_Result">
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="E_Subject" ColumnName="E_Subject" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="IsPublicEmail" ColumnName="IsPublicEmail" />
+          <ScalarProperty Name="IsGroupEmail" ColumnName="IsGroupEmail" />
+          <ScalarProperty Name="IsPrivateEmail" ColumnName="IsPrivateEmail" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="SentTime" ColumnName="SentTime" />
+          <ScalarProperty Name="sentToList" ColumnName="sentToList" />
+          <ScalarProperty Name="SentToId" ColumnName="SentToId" />
+          <ScalarProperty Name="SentToEmail" ColumnName="SentToEmail" />
+          <ScalarProperty Name="SentToName" ColumnName="SentToName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmpGroup" FunctionName="OmailModel.Store.GetEmpGroup">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetEmpGroup_Result">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmpGroups" FunctionName="OmailModel.Store.GetEmpGroups">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetEmpGroups_Result">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmployee" FunctionName="OmailModel.Store.GetEmployee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetEmployee_Result">
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="EmpEmail" ColumnName="EmpEmail" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="OrgCode" ColumnName="OrgCode" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="loginStatus" ColumnName="loginStatus" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="InGroup" ColumnName="InGroup" />
+          <ScalarProperty Name="IsGroupManager" ColumnName="IsGroupManager" />
+          <ScalarProperty Name="IsOrgManager" ColumnName="IsOrgManager" />
+          <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+          <ScalarProperty Name="OrgName" ColumnName="OrgName" />
+          <ScalarProperty Name="DepId" ColumnName="DepId" />
+          <ScalarProperty Name="DepName" ColumnName="DepName" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmployeeEmails" FunctionName="OmailModel.Store.GetEmployeeEmails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetEmployeeEmails_Result">
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="E_Subject" ColumnName="E_Subject" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="IsPublicEmail" ColumnName="IsPublicEmail" />
+          <ScalarProperty Name="IsGroupEmail" ColumnName="IsGroupEmail" />
+          <ScalarProperty Name="IsPrivateEmail" ColumnName="IsPrivateEmail" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="SentTime" ColumnName="SentTime" />
+          <ScalarProperty Name="sentToList" ColumnName="sentToList" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmployees" FunctionName="OmailModel.Store.GetEmployees">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetEmployees_Result">
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="EmpEmail" ColumnName="EmpEmail" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="OrgCode" ColumnName="OrgCode" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="loginStatus" ColumnName="loginStatus" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="InGroup" ColumnName="InGroup" />
+          <ScalarProperty Name="IsGroupManager" ColumnName="IsGroupManager" />
+          <ScalarProperty Name="IsOrgManager" ColumnName="IsOrgManager" />
+          <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+          <ScalarProperty Name="OrgName" ColumnName="OrgName" />
+          <ScalarProperty Name="DepId" ColumnName="DepId" />
+          <ScalarProperty Name="DepName" ColumnName="DepName" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmployeeSeenEmails" FunctionName="OmailModel.Store.GetEmployeeSeenEmails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetEmployeeSeenEmails_Result">
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="E_Subject" ColumnName="E_Subject" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="IsPublicEmail" ColumnName="IsPublicEmail" />
+          <ScalarProperty Name="IsGroupEmail" ColumnName="IsGroupEmail" />
+          <ScalarProperty Name="IsPrivateEmail" ColumnName="IsPrivateEmail" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="SentTime" ColumnName="SentTime" />
+          <ScalarProperty Name="sentToList" ColumnName="sentToList" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmployeeSnoozedEmails" FunctionName="OmailModel.Store.GetEmployeeSnoozedEmails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetEmployeeSnoozedEmails_Result">
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="E_Subject" ColumnName="E_Subject" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="IsPublicEmail" ColumnName="IsPublicEmail" />
+          <ScalarProperty Name="IsGroupEmail" ColumnName="IsGroupEmail" />
+          <ScalarProperty Name="IsPrivateEmail" ColumnName="IsPrivateEmail" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="SentTime" ColumnName="SentTime" />
+          <ScalarProperty Name="sentToList" ColumnName="sentToList" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmployeeSpamEmails" FunctionName="OmailModel.Store.GetEmployeeSpamEmails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetEmployeeSpamEmails_Result">
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="E_Subject" ColumnName="E_Subject" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="IsPublicEmail" ColumnName="IsPublicEmail" />
+          <ScalarProperty Name="IsGroupEmail" ColumnName="IsGroupEmail" />
+          <ScalarProperty Name="IsPrivateEmail" ColumnName="IsPrivateEmail" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="SentTime" ColumnName="SentTime" />
+          <ScalarProperty Name="sentToList" ColumnName="sentToList" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmployeeStarredEmails" FunctionName="OmailModel.Store.GetEmployeeStarredEmails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetEmployeeStarredEmails_Result">
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="E_Subject" ColumnName="E_Subject" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="IsPublicEmail" ColumnName="IsPublicEmail" />
+          <ScalarProperty Name="IsGroupEmail" ColumnName="IsGroupEmail" />
+          <ScalarProperty Name="IsPrivateEmail" ColumnName="IsPrivateEmail" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="SentTime" ColumnName="SentTime" />
+          <ScalarProperty Name="sentToList" ColumnName="sentToList" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetOrganization" FunctionName="OmailModel.Store.GetOrganization">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetOrganization_Result">
+          <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+          <ScalarProperty Name="OrgName" ColumnName="OrgName" />
+          <ScalarProperty Name="EstablishDate" ColumnName="EstablishDate" />
+          <ScalarProperty Name="Vision_Statement" ColumnName="Vision_Statement" />
+          <ScalarProperty Name="OrgType" ColumnName="OrgType" />
+          <ScalarProperty Name="HasOrgCode" ColumnName="HasOrgCode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetOrganizations" FunctionName="OmailModel.Store.GetOrganizations">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetOrganizations_Result">
+          <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+          <ScalarProperty Name="OrgName" ColumnName="OrgName" />
+          <ScalarProperty Name="EstablishDate" ColumnName="EstablishDate" />
+          <ScalarProperty Name="Vision_Statement" ColumnName="Vision_Statement" />
+          <ScalarProperty Name="OrgType" ColumnName="OrgType" />
+          <ScalarProperty Name="HasOrgCode" ColumnName="HasOrgCode" />
+          <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
+          <ScalarProperty Name="SharedVision" ColumnName="SharedVision" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="MarkEmailAsDeleted" FunctionName="OmailModel.Store.MarkEmailAsDeleted" />
+    <FunctionImportMapping FunctionImportName="MarkEmailAsSeen" FunctionName="OmailModel.Store.MarkEmailAsSeen" />
+    <FunctionImportMapping FunctionImportName="MarkEmailAsSnoozed" FunctionName="OmailModel.Store.MarkEmailAsSnoozed" />
+    <FunctionImportMapping FunctionImportName="MarkEmailAsSpam" FunctionName="OmailModel.Store.MarkEmailAsSpam" />
+    <FunctionImportMapping FunctionImportName="MarkEmailAsStarred" FunctionName="OmailModel.Store.MarkEmailAsStarred" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="OmailModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="OmailModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="OmailModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="OmailModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="OmailModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="OmailModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="OmailModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="UpdateDepartment" FunctionName="OmailModel.Store.UpdateDepartment" />
+    <FunctionImportMapping FunctionImportName="UpdateEmail" FunctionName="OmailModel.Store.UpdateEmail" />
+    <FunctionImportMapping FunctionImportName="UpdateEmpGroup" FunctionName="OmailModel.Store.UpdateEmpGroup" />
+    <FunctionImportMapping FunctionImportName="UpdateEmployee" FunctionName="OmailModel.Store.UpdateEmployee" />
+    <FunctionImportMapping FunctionImportName="UpdateOrganization" FunctionName="OmailModel.Store.UpdateOrganization" />
+    <FunctionImportMapping FunctionImportName="GetEmails" FunctionName="OmailModel.Store.GetEmails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OmailModel.GetEmails_Result">
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="E_Subject" ColumnName="E_Subject" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="SentTime" ColumnName="SentTime" />
+          <ScalarProperty Name="IsPublicEmail" ColumnName="IsPublicEmail" />
+          <ScalarProperty Name="IsGroupEmail" ColumnName="IsGroupEmail" />
+          <ScalarProperty Name="IsPrivateEmail" ColumnName="IsPrivateEmail" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="EmpId1" ColumnName="EmpId1" />
+          <ScalarProperty Name="IsStarred" ColumnName="IsStarred" />
+          <ScalarProperty Name="IsSnoozed" ColumnName="IsSnoozed" />
+          <ScalarProperty Name="IsSpam" ColumnName="IsSpam" />
+          <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
+          <ScalarProperty Name="WasDeleted" ColumnName="WasDeleted" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

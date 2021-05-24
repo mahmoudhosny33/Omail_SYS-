@@ -1,0 +1,42 @@
+﻿<Window x:Class="Omail.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Omail.View"
+        xmlns:Components= "clr-namespace:Omail.Components"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Omail"
+        Height="770" Width="1400"
+        Icon="../Images-Omail/Top_Icon.ico"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        MouseDown="Window_MouseDown"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        >
+    <Grid>
+        <materialDesign:Transitioner x:Name="Slide"  SelectedIndex="0" AutoApplyTransitionOrigins="True" IsSynchronizedWithCurrentItem="True">
+            <local:StartPage/>
+            <local:SignIn/>
+            <local:Profile/>
+            <local:FirstPage_SignUp/>
+            <local:SignUp/>
+            <local:Create_Org/>
+            <local:Create_Org_FirstPage/>
+            <local:recievedMessages/>
+            <local:sendEmail/>
+            <local:importantEmail/>
+            <local:spamView/>
+            <local:ViewEmailUserControl/>
+        </materialDesign:Transitioner>
+        
+    </Grid>
+
+</Window>
+    

@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="Omail.View.sendEmail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Omail.View"
+             xmlns:Components= "clr-namespace:Omail.Components"
+             xmlns:icons="clt-namespace:Omail.ResourceDictionary"
+             mc:Ignorable="d" 
+            d:DesignHeight="770" d:DesignWidth="1400"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            Height="770" Width="1400"
+            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+            TextElement.FontWeight="Regular"
+            TextElement.FontSize="13"
+            TextOptions.TextFormattingMode="Ideal"
+            TextOptions.TextRenderingMode="Auto"
+            Background="{DynamicResource MaterialDesignPaper}"
+            FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="494"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Components:AppPanel Grid.Row="0"/>
+        <Components:BlueGradientRect  Grid.Row="1" Grid.RowSpan="5" />
+        <Button  Style="{StaticResource MaterialDesignRaisedDarkButton}" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="100" Height="50"  Grid.Row="1" Click="Button_Click_2"  >
+            <Button.Content>
+                <materialDesign:PackIcon Kind="ArrowBack" />
+            </Button.Content>
+        </Button>
+        <TextBox x:Name="texTo" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Background="White" materialDesign:HintAssist.Hint="to" FontSize="30"  Margin="25,0"  />
+        <TextBox  x:Name="Subject" Grid.Row="3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Background="White" materialDesign:HintAssist.Hint="Subject" FontSize="30"  Margin="25,0"  />
+        <Border Height="400" Width="1300" CornerRadius="50" Grid.Row="4" Background="White" Margin="20">
+            <TextBox x:Name="Body" Width="1100" TextWrapping="Wrap" HorizontalContentAlignment="Stretch"
+                    AcceptsReturn="True"    Height="400" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Background="White"  VerticalContentAlignment="Top"  FontSize="30"  />
+        </Border>
+        <Button  Style="{StaticResource MaterialDesignRaisedDarkButton}" HorizontalAlignment="Right" VerticalAlignment="Center"  Width="100" Height="50"  Grid.Row="5" Click="Button_Click_1"  >
+            <Button.Content>
+                <materialDesign:PackIcon Kind="Send" />
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>

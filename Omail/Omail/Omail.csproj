@@ -1,0 +1,480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{06EB0639-D891-4F17-AA10-F2ADD33A2D41}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Omail</RootNamespace>
+    <AssemblyName>Omail</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.8.6.0\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.2.0.325, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.2.0\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.6.0.325, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PhoneNumbers, Version=8.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\libphonenumber-csharp.8.11.0\lib\net46\PhoneNumbers.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.6.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="API\emailItem.cs" />
+    <Compile Include="API\EmailValidation.cs" />
+    <Compile Include="API\EmailView.cs" />
+    <Compile Include="API\sqlBTNs.cs" />
+    <Compile Include="Components\AppPanel.xaml.cs">
+      <DependentUpon>AppPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\BlueGradientRect.xaml.cs">
+      <DependentUpon>BlueGradientRect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PasswordLabel.xaml.cs">
+      <DependentUpon>PasswordLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TextLabel.xaml.cs">
+      <DependentUpon>TextLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Department.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Email.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmpGroup.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee_has_Email.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee_In_Group.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetDepartments_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetDepartment_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmailsSentByEmployees_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmails_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmail_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmpGroups_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmpGroup_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmployeeEmails_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmployeeSeenEmails_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmployeeSnoozedEmails_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmployeeSpamEmails_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmployeeStarredEmails_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmployees_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEmployee_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetOrganizations_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetOrganization_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization_has_Partner.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\Create_Org.xaml.cs">
+      <DependentUpon>Create_Org.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Create_Org_FirstPage.xaml.cs">
+      <DependentUpon>Create_Org_FirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FirstPage_SignUp.xaml.cs">
+      <DependentUpon>FirstPage_SignUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\importantEmail.xaml.cs">
+      <DependentUpon>importantEmail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Profile.xaml.cs">
+      <DependentUpon>Profile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\recievedMessages.xaml.cs">
+      <DependentUpon>recievedMessages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\sendEmail.xaml.cs">
+      <DependentUpon>sendEmail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SignIn.xaml.cs">
+      <DependentUpon>SignIn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SignUp.xaml.cs">
+      <DependentUpon>SignUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\spamView.xaml.cs">
+      <DependentUpon>spamView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewEmailUserControl.xaml.cs">
+      <DependentUpon>ViewEmailUserControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Components\AppPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\BlueGradientRect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\PasswordLabel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\TextLabel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="ResourceDictionary\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Create_Org.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Create_Org_FirstPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\FirstPage_SignUp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\importantEmail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Profile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\recievedMessages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\sendEmail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SignIn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SignUp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\spamView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ViewEmailUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Images-Omail\license.pdf" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images-Omail\Logo.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\001-active.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\002-audio.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\003-bookmark.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\004-budget.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\005-client.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\006-content.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\007-coding.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\008-download.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\009-ecommerce.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\010-email.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\011-global.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\012-idea.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\013-keyword.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\014-legal.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\015-link.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\016-marketing.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\017-marketing.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\018-mobile.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\019-network.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\020-Official.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\021-photo.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\022-portfolio.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\023-press.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\024-seo.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\025-seo.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\026-mobile.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\027-place.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\028-rating.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\029-server.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\030-tag.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\031-vip.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\032-vision.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\033-social media.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\034-network.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\035-speedometer.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\036-staff.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\037-startup.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\038-strategy.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\039-technical Support.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\040-time management.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\041-touch screen.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\042-target.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\043-upload.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\044-video marketing.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\045-viral.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\046-web link.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\047-website.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\048-website.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\049-worldwide.png" />
+    <Resource Include="Images-Omail\Seo-And-Business\png\050-trash.png" />
+    <Resource Include="Images-Omail\Top_Icon.ico" />
+    <Resource Include="Images-Omail\UseInterface\png\001-advertising.png" />
+    <Resource Include="Images-Omail\UseInterface\png\002-app.png" />
+    <Resource Include="Images-Omail\UseInterface\png\003-edit.png" />
+    <Resource Include="Images-Omail\UseInterface\png\004-event.png" />
+    <Resource Include="Images-Omail\UseInterface\png\005-exit.png" />
+    <Resource Include="Images-Omail\UseInterface\png\006-feed.png" />
+    <Resource Include="Images-Omail\UseInterface\png\007-flag.png" />
+    <Resource Include="Images-Omail\UseInterface\png\008-friend.png" />
+    <Resource Include="Images-Omail\UseInterface\png\009-friends.png" />
+    <Resource Include="Images-Omail\UseInterface\png\010-puzzle.png" />
+    <Resource Include="Images-Omail\UseInterface\png\011-group.png" />
+    <Resource Include="Images-Omail\UseInterface\png\012-lifebuoy.png" />
+    <Resource Include="Images-Omail\UseInterface\png\013-question.png" />
+    <Resource Include="Images-Omail\UseInterface\png\014-conversation.png" />
+    <Resource Include="Images-Omail\UseInterface\png\015-key.png" />
+    <Resource Include="Images-Omail\UseInterface\png\016-language.png" />
+    <Resource Include="Images-Omail\UseInterface\png\017-location-pin.png" />
+    <Resource Include="Images-Omail\UseInterface\png\018-padlock.png" />
+    <Resource Include="Images-Omail\UseInterface\png\019-market.png" />
+    <Resource Include="Images-Omail\UseInterface\png\020-message.png" />
+    <Resource Include="Images-Omail\UseInterface\png\021-clock.png" />
+    <Resource Include="Images-Omail\UseInterface\png\022-feed-1.png" />
+    <Resource Include="Images-Omail\UseInterface\png\023-notification.png" />
+    <Resource Include="Images-Omail\UseInterface\png\024-person.png" />
+    <Resource Include="Images-Omail\UseInterface\png\025-photo.png" />
+    <Resource Include="Images-Omail\UseInterface\png\026-stars.png" />
+    <Resource Include="Images-Omail\UseInterface\png\027-report.png" />
+    <Resource Include="Images-Omail\UseInterface\png\028-manual.png" />
+    <Resource Include="Images-Omail\UseInterface\png\029-search.png" />
+    <Resource Include="Images-Omail\UseInterface\png\030-setting.png" />
+    <Resource Include="Images-Omail\UseInterface\png\031-ball.png" />
+    <Resource Include="Images-Omail\UseInterface\png\032-recommendation.png" />
+    <Resource Include="Images-Omail\UseInterface\png\033-user.png" />
+    <Resource Include="Images-Omail\UseInterface\png\034-video-player.png" />
+    <Resource Include="Images-Omail\UseInterface\png\035-weather.png" />
+    <Resource Include="Images-Omail\UseInterface\png\036-suitcase.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+</Project>

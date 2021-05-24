@@ -1,0 +1,677 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OmailModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepId" />
+    </Key>
+    <Property Name="DepId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__DepId__4222D4EF" FromRole="Department" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="EmpGroup">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Employee_In_Group" Relationship="Self.FK__Employee___Group__47DBAE45" FromRole="EmpGroup" ToRole="Employee_In_Group" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmpId" />
+    </Key>
+    <Property Name="EmpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="EmpEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="EmpHash" Type="String" MaxLength="610" FixedLength="false" Unicode="false" />
+    <Property Name="OrgCode" Type="String" MaxLength="610" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="loginStatus" Type="Boolean" />
+    <Property Name="IsAdmin" Type="Boolean" />
+    <Property Name="InGroup" Type="Boolean" />
+    <Property Name="IsGroupManager" Type="Boolean" />
+    <Property Name="IsOrgManager" Type="Boolean" />
+    <Property Name="OrgId" Type="Int32" />
+    <Property Name="DepId" Type="Int32" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__Employee__DepId__4222D4EF" FromRole="Employee" ToRole="Department" />
+    <NavigationProperty Name="Employee_In_Group" Relationship="Self.FK__Employee___EmpId__46E78A0C" FromRole="Employee" ToRole="Employee_In_Group" />
+    <NavigationProperty Name="Employee_has_Email" Relationship="Self.FK__Employee___EmpId__4CA06362" FromRole="Employee" ToRole="Employee_has_Email" />
+    <NavigationProperty Name="Organization" Relationship="Self.FK__Employee__OrgId__412EB0B6" FromRole="Employee" ToRole="Organization" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="OrgId" />
+    </Key>
+    <Property Name="OrgId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrgName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EstablishDate" Type="DateTime" Precision="0" />
+    <Property Name="Vision_Statement" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="OrgType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="HasOrgCode" Type="Boolean" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__OrgId__412EB0B6" FromRole="Organization" ToRole="Employee" />
+    <NavigationProperty Name="Organization_has_Partner" Relationship="Self.FK__Organizat__OrgId__4AB81AF0" FromRole="Organization" ToRole="Organization_has_Partner" />
+    <NavigationProperty Name="Organization_has_Partner1" Relationship="Self.FK__Organizat__Partn__49C3F6B7" FromRole="Organization" ToRole="Organization_has_Partner" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Employee_has_Email">
+    <Key>
+      <PropertyRef Name="EmpId" />
+      <PropertyRef Name="EmailId" />
+    </Key>
+    <Property Name="EmpId" Type="Int32" Nullable="false" />
+    <Property Name="EmailId" Type="Int32" Nullable="false" />
+    <Property Name="IsStarred" Type="Boolean" />
+    <Property Name="IsSnoozed" Type="Boolean" />
+    <Property Name="IsSent" Type="Boolean" />
+    <Property Name="IsSpam" Type="Boolean" />
+    <Property Name="IsSeen" Type="Boolean" />
+    <Property Name="WasDeleted" Type="Boolean" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Employee___EmpId__4CA06362" FromRole="Employee_has_Email" ToRole="Employee" />
+    <NavigationProperty Name="Email" Relationship="OmailModel.FK__Employee___Email__4D94879B" FromRole="Employee_has_Email" ToRole="Email" />
+  </EntityType>
+  <EntityType Name="Employee_In_Group">
+    <Key>
+      <PropertyRef Name="EmpId" />
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="EmpId" Type="Int32" Nullable="false" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <Property Name="ProjectName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EmpGroup" Relationship="Self.FK__Employee___Group__47DBAE45" FromRole="Employee_In_Group" ToRole="EmpGroup" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Employee___EmpId__46E78A0C" FromRole="Employee_In_Group" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Organization_has_Partner">
+    <Key>
+      <PropertyRef Name="PartnerId" />
+      <PropertyRef Name="OrgId" />
+    </Key>
+    <Property Name="PartnerId" Type="Int32" Nullable="false" />
+    <Property Name="OrgId" Type="Int32" Nullable="false" />
+    <Property Name="SharedVision" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Organization" Relationship="Self.FK__Organizat__OrgId__4AB81AF0" FromRole="Organization_has_Partner" ToRole="Organization" />
+    <NavigationProperty Name="Organization1" Relationship="Self.FK__Organizat__Partn__49C3F6B7" FromRole="Organization_has_Partner" ToRole="Organization" />
+  </EntityType>
+  <Association Name="FK__Employee__DepId__4222D4EF">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee___Group__47DBAE45">
+    <End Role="EmpGroup" Type="Self.EmpGroup" Multiplicity="1" />
+    <End Role="Employee_In_Group" Type="Self.Employee_In_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpGroup">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="Employee_In_Group">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee___EmpId__46E78A0C">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Employee_In_Group" Type="Self.Employee_In_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="Employee_In_Group">
+        <PropertyRef Name="EmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee___EmpId__4CA06362">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Employee_has_Email" Type="Self.Employee_has_Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="Employee_has_Email">
+        <PropertyRef Name="EmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__OrgId__412EB0B6">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrgId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="OrgId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Organizat__OrgId__4AB81AF0">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+    <End Role="Organization_has_Partner" Type="Self.Organization_has_Partner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrgId" />
+      </Principal>
+      <Dependent Role="Organization_has_Partner">
+        <PropertyRef Name="OrgId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Organizat__Partn__49C3F6B7">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+    <End Role="Organization_has_Partner" Type="Self.Organization_has_Partner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrgId" />
+      </Principal>
+      <Dependent Role="Organization_has_Partner">
+        <PropertyRef Name="PartnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OmailEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="EmpGroups" EntityType="Self.EmpGroup" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Organizations" EntityType="Self.Organization" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Employee_has_Email" EntityType="Self.Employee_has_Email" />
+    <EntitySet Name="Employee_In_Group" EntityType="Self.Employee_In_Group" />
+    <EntitySet Name="Organization_has_Partner" EntityType="Self.Organization_has_Partner" />
+    <AssociationSet Name="FK__Employee__DepId__4222D4EF" Association="Self.FK__Employee__DepId__4222D4EF">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee___Group__47DBAE45" Association="Self.FK__Employee___Group__47DBAE45">
+      <End Role="EmpGroup" EntitySet="EmpGroups" />
+      <End Role="Employee_In_Group" EntitySet="Employee_In_Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee___EmpId__46E78A0C" Association="Self.FK__Employee___EmpId__46E78A0C">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Employee_In_Group" EntitySet="Employee_In_Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee___EmpId__4CA06362" Association="Self.FK__Employee___EmpId__4CA06362">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Employee_has_Email" EntitySet="Employee_has_Email" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__OrgId__412EB0B6" Association="Self.FK__Employee__OrgId__412EB0B6">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Organizat__OrgId__4AB81AF0" Association="Self.FK__Organizat__OrgId__4AB81AF0">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="Organization_has_Partner" EntitySet="Organization_has_Partner" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Organizat__Partn__49C3F6B7" Association="Self.FK__Organizat__Partn__49C3F6B7">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="Organization_has_Partner" EntitySet="Organization_has_Partner" />
+    </AssociationSet>
+    <FunctionImport Name="AddDepartment">
+      <Parameter Name="DepName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddEmpGroup">
+      <Parameter Name="GroupName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddEmployee">
+      <Parameter Name="EmpName" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="EmpEmail" Mode="In" Type="String" />
+      <Parameter Name="BirthDate" Mode="In" Type="DateTime" />
+      <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="Hash" Mode="In" Type="String" />
+      <Parameter Name="OrgCode" Mode="In" Type="String" />
+      <Parameter Name="Gender" Mode="In" Type="String" />
+      <Parameter Name="loginStatus" Mode="In" Type="Boolean" />
+      <Parameter Name="IsAdmin" Mode="In" Type="Boolean" />
+      <Parameter Name="InGroup" Mode="In" Type="Boolean" />
+      <Parameter Name="IsGroupManager" Mode="In" Type="Boolean" />
+      <Parameter Name="IsOrgManager" Mode="In" Type="Boolean" />
+      <Parameter Name="OrgId" Mode="In" Type="Int32" />
+      <Parameter Name="DepId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddEmpToGroup">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+      <Parameter Name="GroupId" Mode="In" Type="Int32" />
+      <Parameter Name="ProjectName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddOrganization">
+      <Parameter Name="OrgName" Mode="In" Type="String" />
+      <Parameter Name="EstablishDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Vision_Statement" Mode="In" Type="String" />
+      <Parameter Name="OrgType" Mode="In" Type="String" />
+      <Parameter Name="HasOrgCode" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="AddOrgPartner">
+      <Parameter Name="OrgId" Mode="In" Type="Int32" />
+      <Parameter Name="PartnerId" Mode="In" Type="Int32" />
+      <Parameter Name="SharedVision" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteDepartment">
+      <Parameter Name="DepId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteEmail">
+      <Parameter Name="EmailId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteEmpGroup">
+      <Parameter Name="GroupId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteEmployee">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteOrganization">
+      <Parameter Name="OrgId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetDepartment" ReturnType="Collection(OmailModel.GetDepartment_Result)">
+      <Parameter Name="DepId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetDepartments" ReturnType="Collection(OmailModel.GetDepartments_Result)" />
+    <FunctionImport Name="GetEmail" ReturnType="Collection(OmailModel.GetEmail_Result)" />
+    <FunctionImport Name="GetEmpGroup" ReturnType="Collection(OmailModel.GetEmpGroup_Result)">
+      <Parameter Name="GroupId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetEmpGroups" ReturnType="Collection(OmailModel.GetEmpGroups_Result)" />
+    <FunctionImport Name="GetEmployee" ReturnType="Collection(OmailModel.GetEmployee_Result)">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetEmployeeEmails" ReturnType="Collection(OmailModel.GetEmployeeEmails_Result1)">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetEmployees" ReturnType="Collection(OmailModel.GetEmployees_Result)" />
+    <FunctionImport Name="GetEmployeeSeenEmails" ReturnType="Collection(OmailModel.GetEmployeeSeenEmails_Result)">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetEmployeeSnoozedEmails" ReturnType="Collection(OmailModel.GetEmployeeSnoozedEmails_Result)">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetEmployeeSpamEmails" ReturnType="Collection(OmailModel.GetEmployeeSpamEmails_Result)">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetEmployeeStarredEmails" ReturnType="Collection(OmailModel.GetEmployeeStarredEmails_Result)">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetOrganization" ReturnType="Collection(OmailModel.GetOrganization_Result)">
+      <Parameter Name="OrgId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetOrganizations" ReturnType="Collection(OmailModel.GetOrganizations_Result)" />
+    <FunctionImport Name="MarkEmailAsDeleted">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+      <Parameter Name="EmailId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="MarkEmailAsSeen">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+      <Parameter Name="EmailId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="MarkEmailAsSnoozed">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+      <Parameter Name="EmailId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="MarkEmailAsSpam">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+      <Parameter Name="EmailId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="MarkEmailAsStarred">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+      <Parameter Name="EmailId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(OmailModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(OmailModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="UpdateDepartment">
+      <Parameter Name="DepId" Mode="In" Type="Int32" />
+      <Parameter Name="DepName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateEmail">
+      <Parameter Name="EmailId" Mode="In" Type="Int32" />
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+      <Parameter Name="E_Subject" Mode="In" Type="String" />
+      <Parameter Name="Body" Mode="In" Type="String" />
+      <Parameter Name="IsPublicEmail" Mode="In" Type="Boolean" />
+      <Parameter Name="IsGroupMail" Mode="In" Type="Boolean" />
+      <Parameter Name="IsPrivateEmail" Mode="In" Type="Boolean" />
+      <Parameter Name="Parent" Mode="In" Type="Int32" />
+      <Parameter Name="SentToList" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateEmpGroup">
+      <Parameter Name="GroupId" Mode="In" Type="Int32" />
+      <Parameter Name="GroupName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateEmployee">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+      <Parameter Name="EmpName" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="EmpEmail" Mode="In" Type="String" />
+      <Parameter Name="BirthDate" Mode="In" Type="DateTime" />
+      <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="OrgCode" Mode="In" Type="String" />
+      <Parameter Name="Gender" Mode="In" Type="String" />
+      <Parameter Name="loginStatus" Mode="In" Type="Boolean" />
+      <Parameter Name="IsAdmin" Mode="In" Type="Boolean" />
+      <Parameter Name="InGroup" Mode="In" Type="Boolean" />
+      <Parameter Name="IsGroupManager" Mode="In" Type="Boolean" />
+      <Parameter Name="IsOrgManager" Mode="In" Type="Boolean" />
+      <Parameter Name="OrgId" Mode="In" Type="Int32" />
+      <Parameter Name="DepId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateOrganization">
+      <Parameter Name="OrgId" Mode="In" Type="Int32" />
+      <Parameter Name="OrgName" Mode="In" Type="String" />
+      <Parameter Name="EstablishDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Vision_Statement" Mode="In" Type="String" />
+      <Parameter Name="OrgType" Mode="In" Type="String" />
+      <Parameter Name="HasOrgCode" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="AddEmail">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+      <Parameter Name="E_Subject" Mode="In" Type="String" />
+      <Parameter Name="Body" Mode="In" Type="String" />
+      <Parameter Name="IsPublicEmail" Mode="In" Type="Boolean" />
+      <Parameter Name="IsGroupMail" Mode="In" Type="Boolean" />
+      <Parameter Name="IsPrivateEmail" Mode="In" Type="Boolean" />
+      <Parameter Name="Parent" Mode="In" Type="Int32" />
+      <Parameter Name="SentToList" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="Emails" EntityType="OmailModel.Email" />
+    <AssociationSet Name="FK__Email__Parent__44FF419A" Association="OmailModel.FK__Email__Parent__44FF419A">
+      <End Role="Email" EntitySet="Emails" />
+      <End Role="Email1" EntitySet="Emails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee___Email__4D94879B" Association="OmailModel.FK__Employee___Email__4D94879B">
+      <End Role="Email" EntitySet="Emails" />
+      <End Role="Employee_has_Email" EntitySet="Employee_has_Email" />
+    </AssociationSet>
+    <FunctionImport Name="GetEmailsSentByEmployee" ReturnType="Collection(OmailModel.GetEmailsSentByEmployee_Result)">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetEmailsSentByEmployees" ReturnType="Collection(OmailModel.GetEmailsSentByEmployees_Result)">
+      <Parameter Name="EmpId" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetDepartment_Result">
+    <Property Type="Int32" Name="DepId" Nullable="false" />
+    <Property Type="String" Name="DepName" Nullable="true" MaxLength="45" />
+  </ComplexType>
+  <ComplexType Name="GetDepartments_Result">
+    <Property Type="Int32" Name="DepId" Nullable="false" />
+    <Property Type="String" Name="DepName" Nullable="true" MaxLength="45" />
+  </ComplexType>
+  <ComplexType Name="GetEmail_Result">
+    <Property Type="Int32" Name="EmailId" Nullable="false" />
+    <Property Type="Int32" Name="EmpId" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="45" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="45" />
+    <Property Type="String" Name="E_Subject" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Body" Nullable="true" MaxLength="4000" />
+    <Property Type="Binary" Name="SentTime" Nullable="false" MaxLength="8" />
+    <Property Type="Boolean" Name="IsPublicEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsGroupEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsPrivateEmail" Nullable="true" />
+    <Property Type="Int32" Name="Parent" Nullable="true" />
+    <Property Type="Int32" Name="EmpId1" Nullable="true" />
+    <Property Type="Boolean" Name="IsStarred" Nullable="true" />
+    <Property Type="Boolean" Name="IsSnoozed" Nullable="true" />
+    <Property Type="Boolean" Name="IsSpam" Nullable="true" />
+    <Property Type="Boolean" Name="IsSeen" Nullable="true" />
+    <Property Type="Boolean" Name="WasDeleted" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetEmpGroup_Result">
+    <Property Type="Int32" Name="GroupId" Nullable="false" />
+    <Property Type="String" Name="GroupName" Nullable="true" MaxLength="45" />
+  </ComplexType>
+  <ComplexType Name="GetEmpGroups_Result">
+    <Property Type="Int32" Name="GroupId" Nullable="false" />
+    <Property Type="String" Name="GroupName" Nullable="true" MaxLength="45" />
+  </ComplexType>
+  <ComplexType Name="GetEmployee_Result">
+    <Property Type="Int32" Name="EmpId" Nullable="false" />
+    <Property Type="String" Name="EmpName" Nullable="true" MaxLength="45" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="45" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="45" />
+    <Property Type="String" Name="EmpEmail" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="true" />
+    <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="OrgCode" Nullable="true" MaxLength="610" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
+    <Property Type="Boolean" Name="loginStatus" Nullable="true" />
+    <Property Type="Boolean" Name="IsAdmin" Nullable="true" />
+    <Property Type="Boolean" Name="InGroup" Nullable="true" />
+    <Property Type="Boolean" Name="IsGroupManager" Nullable="true" />
+    <Property Type="Boolean" Name="IsOrgManager" Nullable="true" />
+    <Property Type="Int32" Name="OrgId" Nullable="true" />
+    <Property Type="String" Name="OrgName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="DepId" Nullable="true" />
+    <Property Type="String" Name="DepName" Nullable="true" MaxLength="45" />
+    <Property Type="Int32" Name="GroupId" Nullable="true" />
+    <Property Type="String" Name="GroupName" Nullable="true" MaxLength="45" />
+  </ComplexType>
+  <ComplexType Name="GetEmployeeEmails_Result">
+    <Property Type="Int32" Name="EmailId" Nullable="false" />
+    <Property Type="Int32" Name="EmpId" Nullable="false" />
+    <Property Type="String" Name="E_Subject" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Body" Nullable="true" MaxLength="4000" />
+    <Property Type="Binary" Name="SentTime" Nullable="false" MaxLength="8" />
+    <Property Type="Boolean" Name="IsPublicEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsGroupEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsPrivateEmail" Nullable="true" />
+    <Property Type="Int32" Name="Parent" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetEmployees_Result">
+    <Property Type="Int32" Name="EmpId" Nullable="false" />
+    <Property Type="String" Name="EmpName" Nullable="true" MaxLength="45" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="45" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="45" />
+    <Property Type="String" Name="EmpEmail" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="true" />
+    <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="OrgCode" Nullable="true" MaxLength="610" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
+    <Property Type="Boolean" Name="loginStatus" Nullable="true" />
+    <Property Type="Boolean" Name="IsAdmin" Nullable="true" />
+    <Property Type="Boolean" Name="InGroup" Nullable="true" />
+    <Property Type="Boolean" Name="IsGroupManager" Nullable="true" />
+    <Property Type="Boolean" Name="IsOrgManager" Nullable="true" />
+    <Property Type="Int32" Name="OrgId" Nullable="true" />
+    <Property Type="String" Name="OrgName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="DepId" Nullable="true" />
+    <Property Type="String" Name="DepName" Nullable="true" MaxLength="45" />
+    <Property Type="Int32" Name="GroupId" Nullable="true" />
+    <Property Type="String" Name="GroupName" Nullable="true" MaxLength="45" />
+  </ComplexType>
+  <ComplexType Name="GetEmployeeSeenEmails_Result">
+    <Property Type="Int32" Name="EmailId" Nullable="false" />
+    <Property Type="Int32" Name="EmpId" Nullable="false" />
+    <Property Type="String" Name="E_Subject" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Body" Nullable="true" MaxLength="4000" />
+    <Property Type="Binary" Name="SentTime" Nullable="false" MaxLength="8" />
+    <Property Type="Boolean" Name="IsPublicEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsGroupEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsPrivateEmail" Nullable="true" />
+    <Property Type="Int32" Name="Parent" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetEmployeeSnoozedEmails_Result">
+    <Property Type="Int32" Name="EmailId" Nullable="false" />
+    <Property Type="Int32" Name="EmpId" Nullable="false" />
+    <Property Type="String" Name="E_Subject" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Body" Nullable="true" MaxLength="4000" />
+    <Property Type="Binary" Name="SentTime" Nullable="false" MaxLength="8" />
+    <Property Type="Boolean" Name="IsPublicEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsGroupEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsPrivateEmail" Nullable="true" />
+    <Property Type="Int32" Name="Parent" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetEmployeeSpamEmails_Result">
+    <Property Type="Int32" Name="EmailId" Nullable="false" />
+    <Property Type="Int32" Name="EmpId" Nullable="false" />
+    <Property Type="String" Name="E_Subject" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Body" Nullable="true" MaxLength="4000" />
+    <Property Type="Binary" Name="SentTime" Nullable="false" MaxLength="8" />
+    <Property Type="Boolean" Name="IsPublicEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsGroupEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsPrivateEmail" Nullable="true" />
+    <Property Type="Int32" Name="Parent" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetEmployeeStarredEmails_Result">
+    <Property Type="Int32" Name="EmailId" Nullable="false" />
+    <Property Type="Int32" Name="EmpId" Nullable="false" />
+    <Property Type="String" Name="E_Subject" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Body" Nullable="true" MaxLength="4000" />
+    <Property Type="Binary" Name="SentTime" Nullable="false" MaxLength="8" />
+    <Property Type="Boolean" Name="IsPublicEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsGroupEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsPrivateEmail" Nullable="true" />
+    <Property Type="Int32" Name="Parent" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetOrganization_Result">
+    <Property Type="Int32" Name="OrgId" Nullable="false" />
+    <Property Type="String" Name="OrgName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="EstablishDate" Nullable="true" />
+    <Property Type="String" Name="Vision_Statement" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="OrgType" Nullable="true" MaxLength="20" />
+    <Property Type="Boolean" Name="HasOrgCode" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetOrganizations_Result">
+    <Property Type="Int32" Name="OrgId" Nullable="false" />
+    <Property Type="String" Name="OrgName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="EstablishDate" Nullable="true" />
+    <Property Type="String" Name="Vision_Statement" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="OrgType" Nullable="true" MaxLength="20" />
+    <Property Type="Boolean" Name="HasOrgCode" Nullable="true" />
+    <Property Type="Int32" Name="PartnerId" Nullable="true" />
+    <Property Type="String" Name="SharedVision" Nullable="true" MaxLength="4000" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Email">
+    <Key>
+      <PropertyRef Name="EmailId" />
+    </Key>
+    <Property Name="EmailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpId" Type="Int32" Nullable="false" />
+    <Property Name="E_Subject" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Body" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="IsPublicEmail" Type="Boolean" />
+    <Property Name="IsGroupEmail" Type="Boolean" />
+    <Property Name="IsPrivateEmail" Type="Boolean" />
+    <Property Name="Parent" Type="Int32" />
+    <Property Name="SentTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Email1" Relationship="OmailModel.FK__Email__Parent__44FF419A" FromRole="Email" ToRole="Email1" />
+    <NavigationProperty Name="Email2" Relationship="OmailModel.FK__Email__Parent__44FF419A" FromRole="Email1" ToRole="Email" />
+    <NavigationProperty Name="Employee_has_Email" Relationship="OmailModel.FK__Employee___Email__4D94879B" FromRole="Email" ToRole="Employee_has_Email" />
+  </EntityType>
+  <Association Name="FK__Email__Parent__44FF419A">
+    <End Type="OmailModel.Email" Role="Email" Multiplicity="0..1" />
+    <End Type="OmailModel.Email" Role="Email1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Email">
+        <PropertyRef Name="EmailId" />
+      </Principal>
+      <Dependent Role="Email1">
+        <PropertyRef Name="Parent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee___Email__4D94879B">
+    <End Type="OmailModel.Email" Role="Email" Multiplicity="1" />
+    <End Type="OmailModel.Employee_has_Email" Role="Employee_has_Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Email">
+        <PropertyRef Name="EmailId" />
+      </Principal>
+      <Dependent Role="Employee_has_Email">
+        <PropertyRef Name="EmailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetEmailsSentByEmployee_Result">
+    <Property Type="Int32" Name="EmailId" Nullable="false" />
+    <Property Type="Int32" Name="EmpId" Nullable="false" />
+    <Property Type="String" Name="E_Subject" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Body" Nullable="true" MaxLength="4000" />
+    <Property Type="Boolean" Name="IsPublicEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsGroupEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsPrivateEmail" Nullable="true" />
+    <Property Type="Int32" Name="Parent" Nullable="true" />
+    <Property Type="DateTime" Name="SentTime" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="GetEmailsSentByEmployees_Result">
+    <Property Type="Int32" Name="EmailId" Nullable="false" />
+    <Property Type="Int32" Name="EmpId" Nullable="false" />
+    <Property Type="String" Name="E_Subject" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Body" Nullable="true" MaxLength="4000" />
+    <Property Type="Boolean" Name="IsPublicEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsGroupEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsPrivateEmail" Nullable="true" />
+    <Property Type="Int32" Name="Parent" Nullable="true" />
+    <Property Type="DateTime" Name="SentTime" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="SentToId" Nullable="true" />
+    <Property Type="String" Name="SentToEmail" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="SentToName" Nullable="true" MaxLength="45" />
+  </ComplexType>
+  <ComplexType Name="GetEmployeeEmails_Result1">
+    <Property Type="Int32" Name="EmailId" Nullable="false" />
+    <Property Type="Int32" Name="EmpId" Nullable="false" />
+    <Property Type="String" Name="E_Subject" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Body" Nullable="true" MaxLength="4000" />
+    <Property Type="Boolean" Name="IsPublicEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsGroupEmail" Nullable="true" />
+    <Property Type="Boolean" Name="IsPrivateEmail" Nullable="true" />
+    <Property Type="Int32" Name="Parent" Nullable="true" />
+    <Property Type="DateTime" Name="SentTime" Nullable="true" Precision="23" />
+  </ComplexType>
+</Schema>

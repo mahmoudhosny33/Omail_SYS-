@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Omail.ResourceDictionary">
+
+    <BitmapImage x:Key="User" UriSource="../Images-Omail/UseInterface/png/033-user.png"/>
+    <BitmapImage x:Key="Logo" UriSource="../Images-Omail/Logo.png"/>
+    <BitmapImage x:Key="ExistOrg" UriSource="../Images-Omail/Seo-And-Business/png/022-portfolio.png"/>
+    <BitmapImage x:Key="NewOrg" UriSource="..\Images-Omail\Seo-And-Business\png\033-social media.png"/>
+</ResourceDictionary>
